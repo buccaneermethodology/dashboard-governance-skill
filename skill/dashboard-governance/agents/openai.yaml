@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dashboard Governance"
+  short_description: "Maintain Big Ideas and Sessions"
+  default_prompt: "Use $dashboard-governance to update a Big-Idea/Session/Decision Dashboard after a project task."
