@@ -176,6 +176,10 @@ This repository focuses on governance after a Dashboard exists: maintaining stat
 
 For a complementary skill that synthesizes an initial Exploration Dashboard from unstructured material, see [Exploration Dashboard Synthesizer](https://github.com/buccaneermethodology/ExplorationDashboardSynthesizer).
 
+## Related Articles
+
+- [把探索过程交给 Dashboard：从 RSEM 到 dashboard-governance-skill](docs/articles/rsem-dashboard-governance-skill.md)
+
 ## References
 
 - [Exploration Dashboard Synthesizer](https://github.com/buccaneermethodology/ExplorationDashboardSynthesizer)
@@ -203,6 +207,6 @@ MIT. See [LICENSE](LICENSE).
 
 ## Maintenance
 
-Maintainer: Tai Xiaomei buccaneermethodology@gmail.com GitHub: @buccanneermethodology
+Maintainer: Tai Xiaomei buccaneermethodology@gmail.com GitHub: @buccaneermethodology
 
 For maintainer release steps, see [docs/PUBLISHING.md](docs/PUBLISHING.md).
