@@ -183,28 +183,6 @@ For a complementary skill that synthesizes an initial Exploration Dashboard from
 - [Codex skill folder](skill/dashboard-governance/SKILL.md)
 - [Dashboard example templates](examples/Dashboard/README.md)
 
-## Publish To GitHub
-
-From the repository root, create a public repository and push `main`:
-
-```bash
-gh repo create dashboard-governance-skill --public --source . --remote origin --push
-```
-
-If you prefer the GitHub web UI, create an empty public repository named `dashboard-governance-skill`, then run:
-
-```bash
-git remote add origin https://github.com/<owner>/dashboard-governance-skill.git
-git push -u origin main
-```
-
-Recommended release flow:
-
-1. Keep installable skill files under `skill/dashboard-governance/`.
-2. Run local and official validators before tagging.
-3. Tag stable releases with semantic versions such as `v0.1.0`.
-4. Include compatibility notes when Dashboard row semantics change.
-
 See [docs/PUBLISHING.md](docs/PUBLISHING.md) for the release checklist.
 
 ## Contributing
@@ -222,3 +200,9 @@ Please keep the installable skill concise. Human-facing repository docs belong o
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+## Maintenance
+
+Maintainer: Tai Xiaomei buccaneermethodology@gmail.com GitHub: @buccanneermethodology
+
+For maintainer release steps, see [docs/PUBLISHING.md](docs/PUBLISHING.md).
