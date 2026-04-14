@@ -3,6 +3,7 @@
   
 作者：邰晓梅
 首次发布日期：2026年4月14日
+原文链接：https://mp.weixin.qq.com/s/J928Kt_0ndiTDhedncgKbw
   
  配套项目：[dashboard-governance-skill](https://github.com/buccaneermethodology/dashboard-governance-skill)
 
