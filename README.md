@@ -1,5 +1,6 @@
 # Dashboard Governance Skill
 
+[![validate](https://github.com/buccaneermethodology/dashboard-governance-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/buccaneermethodology/dashboard-governance-skill/actions/workflows/validate.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 `dashboard-governance` is a portable Codex skill for maintaining a project Dashboard across long-running human-AI work. It helps an AI coding agent update Big Ideas, Sessions, Decisions, TSP fields, status, blockers, durable outputs, and emergent next steps without treating the Dashboard as canonical project truth.
@@ -58,7 +59,7 @@ After non-trivial work, the agent reviews whether a new high-priority bounded ne
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<owner>/dashboard-governance-skill.git
+git clone https://github.com/buccaneermethodology/dashboard-governance-skill.git
 cd dashboard-governance-skill
 ```
 
