@@ -179,8 +179,7 @@ For a complementary skill that synthesizes an initial Exploration Dashboard from
 ## Related Articles
 
 - [把探索过程交给 Dashboard：从 RSEM 到 dashboard-governance-skill](docs/articles/rsem-dashboard-governance-skill.md)
-
-- [BM Dashboard：一种用于管理高度探索性认知过程的结构化框架](docs/articles/BM Dashboard.md)
+- [BM Dashboard：一种用于管理高度探索性认知过程的结构化框架](docs/articles/BM%20Dashboard.md)
 
 ## References
 
