@@ -25,3 +25,8 @@ A Session is a bounded execution or exploration unit. It should have Topic, Scop
 ## Decision
 
 A Decision records a choice that could block or distort multiple sessions if left implicit.
+
+## References
+
+- [Exploration Dashboard Synthesizer](https://github.com/buccaneermethodology/ExplorationDashboardSynthesizer) is an OpenClaw skill for turning unstructured notes, brainstorming fragments, and documentation excerpts into a structured Exploration Dashboard.
+- [Dashboard method article](https://mp.weixin.qq.com/s/9XrmJUYoRppsLkl4JVnkBQ) provides additional background on the Dashboard method.
