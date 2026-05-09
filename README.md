@@ -3,9 +3,9 @@
 [![validate](https://github.com/buccaneermethodology/dashboard-governance-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/buccaneermethodology/dashboard-governance-skill/actions/workflows/validate.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-`dashboard-governance` is a portable Codex skill for maintaining a project Dashboard across long-running human-AI work. It helps an AI coding agent update Big Ideas, Sessions, Decisions, TSP fields, status, blockers, durable outputs, and emergent next steps without treating the Dashboard as canonical project truth.
+`dashboard-governance` is a portable Codex skill for maintaining a project Dashboard across long-running human-AI work. It helps an AI coding agent update Big Ideas, Sessions, Decisions, TSP fields, status, blockers, durable outputs, scope-aware closeout, and emergent next steps without treating the Dashboard as canonical project truth.
 
-The skill is useful when a repository needs an execution-state layer that survives model changes, session changes, and handoff between humans and AI agents.
+The skill is useful when a repository needs an execution-state layer that survives model changes, session changes, and handoff between humans and AI agents. The default template stays lightweight; v0.2.0 also adds an optional advanced governance layer for projects that need stage plans, risks, exceptions, quality metrics, automation, external artifact indexes, agent logs, or validation/closure lanes.
 
 ## What It Is For
 
@@ -17,7 +17,10 @@ Use this skill when you want an AI agent to:
 - preserve Topic, Scope, and Purpose for large tracks and bounded tasks
 - update task state after meaningful progress
 - record unresolved choices separately from implementation tasks
+- close narrowed work honestly before marking rows done
 - identify concrete P0/P1 next-session candidates after work finishes
+- preserve P2/P3 candidate memory only when it is specific and costly to rediscover
+- use optional advanced governance files for non-trivial governed batches
 - keep `todo` rows as visible options, not execution promises
 
 It is not a replacement for an architecture document, issue tracker, design review, or human priority decision. It is a lightweight coordination surface for agentic work.
@@ -42,14 +45,23 @@ TSP means Topic, Scope, and Purpose. Big Ideas and Sessions should expose all th
 
 ### Emergent Sessions
 
-After non-trivial work, the agent reviews whether a new high-priority bounded next step has become visible. Only concrete P0/P1 candidates should be added by default. Low-priority speculation belongs outside the active session queue.
+After non-trivial work, the agent reviews whether a new bounded next step has become visible. Concrete P0/P1 candidates should be added by default. P2/P3 candidates should be added only when they are specific, low-noise, and costly to rediscover. Low-priority speculation belongs outside the active session queue.
+
+### Scope-Aware Closeout
+
+If actual work completed only a narrowed subset of the original session, the agent should update the row text first, then mark it `done`, then add follow-on sessions for the remaining concrete work.
+
+### Minimal And Advanced Modes
+
+Use `examples/Dashboard/` for lightweight projects. Use `examples/Dashboard-advanced/` when the project needs optional files such as `Stage_Plans.md`, `Risks.md`, `Exceptions.md`, `Quality_Metrics.md`, `Automation.md`, `External_Artifacts.md`, or `Agent_Logs/README.md`.
 
 ## Features
 
 - Codex-native skill layout with `SKILL.md` and `agents/openai.yaml`
-- Reference method for Dashboard row semantics and end-of-task review
-- Example `Dashboard/` directory that can be copied into a repository
-- No-dependency local validator for skill structure
+- Reference method for Dashboard row semantics, scope narrowing, candidate memory, and end-of-task review
+- Optional advanced governance reference for stage plans, validation, closure, and Dashboard bloat control
+- Minimal and advanced example Dashboard directories that can be copied into a repository
+- No-dependency local validators for skill structure and Dashboard health
 - GitHub Actions workflow for validation on push and pull request
 - Portability notes for Claude Code, Cursor, Windsurf, Continue, and other IDE agents
 - Publishing checklist for public GitHub release
@@ -76,10 +88,16 @@ Start a new Codex session so the skill registry is reloaded.
 
 ### 3. Add Dashboard templates to a project
 
-From your target repository, copy the example Dashboard folder:
+From your target repository, copy the minimal example Dashboard folder:
 
 ```bash
 cp -R /path/to/dashboard-governance-skill/examples/Dashboard ./Dashboard
+```
+
+For advanced governed execution, copy the advanced template instead:
+
+```bash
+cp -R /path/to/dashboard-governance-skill/examples/Dashboard-advanced ./Dashboard
 ```
 
 Then edit the rows to match your project. Keep the row semantics in `Dashboard/Methodology.md` and `Dashboard/Rules.md` visible to future agents.
@@ -89,7 +107,7 @@ Then edit the rows to match your project. Keep the row semantics in `Dashboard/M
 Example end-of-task prompt:
 
 ```text
-Use $dashboard-governance after finishing this task. Update Big Ideas, Sessions, and Decisions, and decide whether any high-priority sessions emerged.
+Use $dashboard-governance after finishing this task. Update Big Ideas, Sessions, and Decisions, decide whether any candidate next sessions emerged, and recommend the next row with rationale.
 ```
 
 Example bootstrap prompt:
@@ -104,7 +122,7 @@ A human finishes a project task and asks the agent to update the Dashboard. The 
 
 ```text
 Task completed: added the first provider-neutral runner skeleton and fake-provider tests.
-Use $dashboard-governance to update the Dashboard and identify any P0/P1 next sessions.
+Use $dashboard-governance to update the Dashboard, identify candidate next sessions, and recommend the next row with rationale.
 ```
 
 Expected Dashboard effects:
@@ -114,8 +132,9 @@ Expected Dashboard effects:
 | Sessions | Mark the active runner session `done` if exit criteria are met. |
 | Big Ideas | Update the parent track's next step without closing it prematurely. |
 | Decisions | Add or resolve provider, dependency, or rollout choices if they affect later sessions. |
-| Emergent sessions | Add only concrete P0/P1 candidates, such as a first real provider adapter. |
-| Final response | State whether Dashboard and stable project truth needed updates. |
+| Emergent sessions | Add concrete P0/P1 candidates, and P2/P3 only when they preserve specific high-cost memory. |
+| Scope narrowing | If the task completed only a subset, narrow the row before marking it `done` and add follow-on sessions. |
+| Final response | State whether Dashboard and stable project truth needed updates, then recommend the next row with why-now and why-this detail. |
 
 A minimal Session row looks like this:
 
@@ -132,6 +151,7 @@ skill/dashboard-governance/
   SKILL.md
   agents/openai.yaml
   references/dashboard-method.md
+  references/advanced-governance.md
 examples/Dashboard/
   README.md
   Methodology.md
@@ -139,11 +159,26 @@ examples/Dashboard/
   Big_Ideas.md
   Sessions.md
   Decisions.md
+examples/Dashboard-advanced/
+  README.md
+  Methodology.md
+  Rules.md
+  Big_Ideas.md
+  Sessions.md
+  Decisions.md
+  Stage_Plans.md
+  Risks.md
+  Exceptions.md
+  Quality_Metrics.md
+  Automation.md
+  External_Artifacts.md
+  Agent_Logs/README.md
 docs/
   PORTABILITY.md
   PUBLISHING.md
 scripts/
   validate_skill.py
+  validate_dashboard.py
 .github/
   workflows/validate.yml
   ISSUE_TEMPLATE/
@@ -156,6 +191,8 @@ Run the bundled no-dependency validator:
 
 ```bash
 python3 scripts/validate_skill.py skill/dashboard-governance
+python3 scripts/validate_dashboard.py examples/Dashboard
+python3 scripts/validate_dashboard.py examples/Dashboard-advanced
 ```
 
 If you have the official Codex skill validator available, run it too:
@@ -185,7 +222,10 @@ For a complementary skill that synthesizes an initial Exploration Dashboard from
 - [Exploration Dashboard Synthesizer](https://github.com/buccaneermethodology/ExplorationDashboardSynthesizer)
 - [BM Dashboard：一种用于管理高度探索性认知过程的结构化框架](https://github.com/buccaneermethodology/ExplorationDashboardSynthesizer/blob/main/docs/bm-dashboard.md)
 - [Codex skill folder](skill/dashboard-governance/SKILL.md)
-- [Dashboard example templates](examples/Dashboard/README.md)
+- [Dashboard method reference](skill/dashboard-governance/references/dashboard-method.md)
+- [Advanced governance reference](skill/dashboard-governance/references/advanced-governance.md)
+- [Minimal Dashboard example template](examples/Dashboard/README.md)
+- [Advanced Dashboard example template](examples/Dashboard-advanced/README.md)
 
 See [docs/PUBLISHING.md](docs/PUBLISHING.md) for the release checklist.
 

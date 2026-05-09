@@ -14,3 +14,7 @@ jobs:
           python-version: "3.11"
       - name: Validate skill layout
         run: python3 scripts/validate_skill.py skill/dashboard-governance
+      - name: Validate minimal Dashboard example
+        run: python3 scripts/validate_dashboard.py examples/Dashboard
+      - name: Validate advanced Dashboard example
+        run: python3 scripts/validate_dashboard.py examples/Dashboard-advanced

@@ -26,6 +26,14 @@ A Session is a bounded execution or exploration unit. It should have Topic, Scop
 
 A Decision records a choice that could block or distort multiple sessions if left implicit.
 
+## Closeout
+
+A completed Session should describe the scope that actually finished. If the work narrowed, revise the row first, then mark it `done`, and add follow-on Sessions for remaining concrete work.
+
+## Advanced Layer
+
+Use the advanced Dashboard template only when the project needs optional stage plans, risks, exceptions, quality metrics, automation, external artifacts, or validation/closure lanes.
+
 ## References
 
 - [Exploration Dashboard Synthesizer](https://github.com/buccaneermethodology/ExplorationDashboardSynthesizer) is an OpenClaw skill for turning unstructured notes, brainstorming fragments, and documentation excerpts into a structured Exploration Dashboard.

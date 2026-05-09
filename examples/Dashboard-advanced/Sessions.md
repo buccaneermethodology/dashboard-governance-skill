@@ -1,0 +1,7 @@
+# Sessions
+
+| ID | Topic | Scope | Purpose | Track | Priority | Status | Depends On | Deliverable | Exit Criteria | Next Step | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| S-001 | Bootstrap Advanced Dashboard | Create the advanced Dashboard file set and frontier snapshot; excludes project-specific phase codes. | Give agents a complete optional governance template. | BI-001 | P1 | `done` | none | `Dashboard/` advanced files | Core and optional files exist with row semantics documented. | Use S-002 to test the closeout gate. | Durable artifact is the Dashboard directory. |
+| S-002 | Wire Validation Gate | Add validation evidence and closure notes for SP-001; excludes unrelated implementation work. | Make Stage Plan closeout depend on an explicit verdict. | BI-002 | P1 | `doing` | S-001 | Validation row and closure update | SP-001 has evidence or a blocker before being closed. | Finish validation before closing SP-001. | Active frontier row. |
+| S-003 | Preserve Low-Priority Validator Memory | Capture a specific P2 validator enhancement if it is not completed now; excludes broad lint ideas. | Avoid rediscovering a precise hidden-debt check later. | BI-002 | P2 | `todo` | S-002 | Follow-on validator row | The deferred check is concrete enough to implement later without chat memory. | Revisit only after S-002 closes. | Example of allowed P2/P3 candidate memory. |
