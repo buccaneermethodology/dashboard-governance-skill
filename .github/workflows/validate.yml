@@ -15,6 +15,12 @@ jobs:
       - name: Validate skill layout
         run: python3 scripts/validate_skill.py skill/dashboard-governance
       - name: Validate minimal Dashboard example
-        run: python3 scripts/validate_dashboard.py examples/Dashboard
+        run: python3 scripts/validate_dashboard.py examples/Dashboard --contract examples/contracts/dashboard_governance_contract.json
       - name: Validate advanced Dashboard example
-        run: python3 scripts/validate_dashboard.py examples/Dashboard-advanced
+        run: python3 scripts/validate_dashboard.py examples/Dashboard-advanced --contract examples/contracts/dashboard_governance_contract.json --require-registry
+      - name: Test registry and DKG fail-closed behavior
+        run: python3 scripts/test_registry.py
+      - name: Validate registry sample directly
+        run: |
+          python3 examples/Dashboard-advanced/tools/session_registry.py reconcile --repo examples/Dashboard-advanced --contract examples/contracts/dashboard_governance_contract.json --check
+          python3 examples/Dashboard-advanced/tools/session_registry.py validate --repo examples/Dashboard-advanced --contract examples/contracts/dashboard_governance_contract.json

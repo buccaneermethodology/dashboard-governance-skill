@@ -62,6 +62,18 @@ def validate(skill_dir: Path) -> list[str]:
     if not references:
         errors.append("at least one references/*.md file is expected for this skill")
 
+    combined = text + "\n" + "\n".join(path.read_text(encoding="utf-8") for path in references)
+    for marker in ("dashboard_governance_contract.json", "reconcile --check", "reconcile --apply", "DKG", "Claim Ceiling"):
+        if marker not in combined:
+            errors.append(f"portable governance marker missing: {marker}")
+
+    root = skill_dir.parents[1]
+    version_file = root / "VERSION"
+    if not version_file.is_file() or version_file.read_text(encoding="utf-8").strip() != "0.2.0":
+        errors.append("VERSION must be 0.2.0")
+    if not (root / "examples/contracts/dashboard_governance_contract.json").is_file():
+        errors.append("portable sample contract is missing")
+
     return errors
 
 

@@ -1,0 +1,13 @@
+{
+  "schema_version": "dashboard_session_archive_manifest_v1",
+  "managed_archives": [
+    "Completed.md"
+  ],
+  "archive_files": {
+    "Completed.md": 1
+  },
+  "current_count": 3,
+  "archive_count": 1,
+  "record_count": 4,
+  "claim_ceiling": "dashboard_execution_memory_projection_only"
+}

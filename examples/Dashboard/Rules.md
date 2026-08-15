@@ -13,7 +13,8 @@
 - Every row should have exit criteria.
 - Sessions should be small enough to complete in one focused work cycle.
 - Decisions should state a recommended option when possible.
-- Status must use the controlled vocabulary: `todo`, `doing`, `blocked`, `decision-needed`, `done`, `archived`, or `cancelled`.
+- Status must use the lifecycle values authorized by the selected Dashboard governance contract. This template uses the bundled portable contract: `todo`, `doing`, `blocked`, `decision-needed`, `done`, `archived`, or `cancelled`.
+- Keep lifecycle Status separate from delivery state, claim ceiling, authority/blocker, evidence, and next action.
 
 ## Scope Narrowing
 

@@ -1,0 +1,61 @@
+{
+  "schema_version": "dashboard_governance_contract_v1",
+  "contract_role": "portable_default",
+  "authority": {
+    "lifecycle_status": "this_contract",
+    "project_override_path": "kb/data/strategy/dashboard_governance_contract.json",
+    "dashboard_role": "execution_memory_not_canonical_truth"
+  },
+  "lifecycle_status": {
+    "allowed": [
+      "todo",
+      "doing",
+      "blocked",
+      "decision-needed",
+      "done",
+      "archived",
+      "cancelled"
+    ],
+    "active": "doing",
+    "candidate": "todo",
+    "terminal": ["done", "archived", "cancelled"]
+  },
+  "independent_state_axes": [
+    "Status",
+    "Delivery State",
+    "Claim Ceiling",
+    "Authority / Blocker",
+    "Evidence",
+    "Next"
+  ],
+  "forbidden_status_collapses": [
+    "partial",
+    "proposed",
+    "candidate",
+    "approved",
+    "reviewed",
+    "bounded-*"
+  ],
+  "required_columns": {
+    "Big_Ideas.md": ["ID", "Topic", "Scope", "Purpose", "Status", "Exit Criteria", "Next Step", "Notes"],
+    "Sessions.md": ["ID", "Topic", "Scope", "Purpose", "Track", "Priority", "Status", "Depends On", "Deliverable", "Exit Criteria", "Next Step", "Notes"],
+    "Decisions.md": ["ID", "Topic", "Status", "Options", "Decision", "Rationale", "Next Step", "Notes"],
+    "Stage_Plans.md": ["ID", "Topic", "Scope", "Purpose", "Status", "Tracks", "Exit Criteria", "Validation", "Next Step", "Notes"],
+    "Risks.md": ["ID", "Topic", "Status", "Severity", "Trigger", "Mitigation", "Next Review", "Notes"],
+    "Exceptions.md": ["ID", "Topic", "Status", "Related Row", "Exception", "Resolution", "Next Step", "Notes"],
+    "Quality_Metrics.md": ["ID", "Metric", "Status", "Target", "Current", "Evidence", "Next Step", "Notes"],
+    "Automation.md": ["ID", "Topic", "Status", "Trigger", "Action", "Owner", "Last Run", "Next Step", "Notes"],
+    "External_Artifacts.md": ["ID", "Topic", "Status", "Location", "Artifact Type", "Related Rows", "Verification", "Notes"]
+  },
+  "registry": {
+    "surfaces": ["Sessions.md", "Session_Index.md", "Archives/Sessions/*.md", "Archives/Sessions/archive_manifest.json"],
+    "authoritative": ["Sessions.md", "Archives/Sessions/*.md"],
+    "derived": ["Session_Index.md", "Archives/Sessions/archive_manifest.json"],
+    "fail_closed_on": ["duplicate_id", "malformed_row", "unknown_status", "unknown_archive_surface", "symlink"]
+  },
+  "dkg": {
+    "role": "read_model_only",
+    "generation": "explicit_post_registry_gate",
+    "reconcile_side_effect": false
+  }
+}

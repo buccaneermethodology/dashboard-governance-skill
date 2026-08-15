@@ -1,5 +1,7 @@
 # Dashboard Governance Skill
 
+Current candidate version: `0.2.0`. Local files and validators do not prove publication; publication requires the tag and GitHub Release steps in `docs/PUBLISHING.md`.
+
 [![validate](https://github.com/buccaneermethodology/dashboard-governance-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/buccaneermethodology/dashboard-governance-skill/actions/workflows/validate.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -62,6 +64,7 @@ Use `examples/Dashboard/` for lightweight projects. Use `examples/Dashboard-adva
 - Optional advanced governance reference for stage plans, validation, closure, and Dashboard bloat control
 - Minimal and advanced example Dashboard directories that can be copied into a repository
 - No-dependency local validators for skill structure and Dashboard health
+- Portable contract authority, optional four-surface Session registry reconciliation, and explicit post-gate DKG sample tooling
 - GitHub Actions workflow for validation on push and pull request
 - Portability notes for Claude Code, Cursor, Windsurf, Continue, and other IDE agents
 - Publishing checklist for public GitHub release
@@ -101,6 +104,19 @@ cp -R /path/to/dashboard-governance-skill/examples/Dashboard-advanced ./Dashboar
 ```
 
 Then edit the rows to match your project. Keep the row semantics in `Dashboard/Methodology.md` and `Dashboard/Rules.md` visible to future agents.
+
+For the advanced registry workflow, also install a project contract:
+
+```bash
+mkdir -p kb/data/strategy
+cp /path/to/dashboard-governance-skill/examples/contracts/dashboard_governance_contract.json \
+  kb/data/strategy/dashboard_governance_contract.json
+python3 Dashboard/tools/session_registry.py reconcile --repo . --check
+python3 Dashboard/tools/session_registry.py validate --repo .
+python3 Dashboard/tools/generate_dashboard_kg.py --repo . --output Dashboard/dashboard-kg.json
+```
+
+The selected contract is the lifecycle Status authority. Reconcile may rebuild only the derived index and manifest counts; DKG generation is a separate post-gate operation, and its output is never Dashboard authority.
 
 ### 4. Ask Codex to use the skill
 
@@ -173,6 +189,11 @@ examples/Dashboard-advanced/
   Automation.md
   External_Artifacts.md
   Agent_Logs/README.md
+  Session_Index.md
+  Archives/Sessions/
+  tools/session_registry.py
+  tools/generate_dashboard_kg.py
+examples/contracts/dashboard_governance_contract.json
 docs/
   PORTABILITY.md
   PUBLISHING.md
@@ -191,8 +212,9 @@ Run the bundled no-dependency validator:
 
 ```bash
 python3 scripts/validate_skill.py skill/dashboard-governance
-python3 scripts/validate_dashboard.py examples/Dashboard
-python3 scripts/validate_dashboard.py examples/Dashboard-advanced
+python3 scripts/validate_dashboard.py examples/Dashboard --contract examples/contracts/dashboard_governance_contract.json
+python3 scripts/validate_dashboard.py examples/Dashboard-advanced --contract examples/contracts/dashboard_governance_contract.json --require-registry
+python3 scripts/test_registry.py
 ```
 
 If you have the official Codex skill validator available, run it too:

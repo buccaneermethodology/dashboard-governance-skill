@@ -18,17 +18,57 @@ Every Big Idea and Session should expose:
 - Scope: what is inside and outside the item.
 - Purpose: why the item matters now.
 
-## Status Vocabulary
+## Contract And Status Authority
 
-Use a small controlled vocabulary:
+Prefer the project's `kb/data/strategy/dashboard_governance_contract.json`. It is the lifecycle and field authority for that project. If it is absent, explicitly use the bundled `examples/contracts/dashboard_governance_contract.json` as the portable default; do not imply that a project-specific contract exists.
 
-- `todo`: visible candidate next step.
-- `doing`: currently active.
-- `blocked`: waiting on dependency.
-- `decision-needed`: cannot proceed safely without a choice.
-- `done`: completed and reflected in a durable artifact.
-- `archived`: kept for reference, not active.
-- `cancelled`: intentionally stopped and not expected to resume.
+The bundled default authorizes `todo`, `doing`, `blocked`, `decision-needed`, `done`, `archived`, and `cancelled`. A project contract may choose other values. Validators and agents must read the selected contract rather than maintaining a second enum.
+
+Project these axes independently:
+
+- lifecycle `Status`: where the row is in its execution lifecycle
+- Delivery State: what was materially produced
+- Claim Ceiling: the strongest conclusion supported by evidence
+- Authority / Blocker: who may decide or what prevents progress
+- Evidence: durable proof and its provenance
+- Next: the next bounded action
+
+Words such as `partial`, `proposed`, `candidate`, `bounded-*`, approval state, and reviewer verdict do not become lifecycle Status merely because they describe work. Put them on the appropriate axis.
+
+## Session Registry Operator Runbook
+
+A registry-capable Dashboard exposes four surfaces:
+
+1. `Sessions.md`: current authoritative Session records.
+2. `Session_Index.md`: derived locator projection.
+3. `Archives/Sessions/*.md`: authoritative historical Session records.
+4. `Archives/Sessions/archive_manifest.json`: archive inventory and counts.
+
+Use the project-provided tooling. The bundled advanced example demonstrates this portable command order:
+
+```bash
+python3 Dashboard/tools/session_registry.py reconcile --repo . --check
+python3 Dashboard/tools/session_registry.py validate --repo .
+# edit an authoritative Markdown record
+python3 Dashboard/tools/session_registry.py reconcile --repo . --check
+python3 Dashboard/tools/session_registry.py reconcile --repo . --apply  # derived drift only
+python3 Dashboard/tools/session_registry.py reconcile --repo . --check
+python3 Dashboard/tools/session_registry.py validate --repo .
+```
+
+`reconcile --apply` may rebuild only the index and derived manifest counts. It must fail closed on duplicate IDs, malformed rows, unknown lifecycle values, manifest/file disagreement, symlinks, or unexpected archive files. Handle those inputs manually; never guess identity, pick the first duplicate, or delete an unknown file.
+
+Projects without equivalent tooling do not have executable reconciliation capability. They may adopt the sample or keep a simpler Dashboard, but must not claim that the four surfaces were reconciled.
+
+## DKG Post-Gate
+
+A Dashboard Knowledge Graph is a read model, not authority. Generate it only after registry `reconcile --check` and `validate` pass, and only when graph-affecting inputs changed:
+
+```bash
+python3 Dashboard/tools/generate_dashboard_kg.py --repo . --output Dashboard/dashboard-kg.json
+```
+
+The generator must rerun or enforce the registry gate. `session_registry.py reconcile` must never generate DKG implicitly.
 
 ## Emergent Session Filter
 
@@ -50,10 +90,11 @@ Add P0 or P1 candidates by default. Add P2/P3 candidates only when they are spec
 
 If actual work completed only a narrower subset of the original session:
 
-1. Rewrite the row Topic, Scope, Deliverable, Exit Criteria, and Notes so the row describes what actually completed.
-2. Mark the revised row `done` only after the narrowed scope is accurate.
-3. Add one or more follow-on sessions for the remaining concrete work.
-4. Keep the follow-on rows specific enough that a later agent does not need to reconstruct the omitted scope from chat history.
+1. Preserve the original requirement or a durable pointer to it.
+2. Record what narrowed, why, its impact, and any required approval.
+3. Mark the bounded result complete only when the selected contract and evidence allow it.
+4. Add one or more follow-on sessions for the remaining concrete work.
+5. Keep the follow-on rows specific enough that a later agent does not need to reconstruct the omitted scope from chat history.
 
 Do not mark an overbroad row `done` and leave the uncompleted parts implicit.
 

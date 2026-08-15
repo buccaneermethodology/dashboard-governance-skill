@@ -10,7 +10,8 @@
 
 - Keep `Big_Ideas.md`, `Sessions.md`, and `Decisions.md` present.
 - Big Ideas and Sessions must expose Topic, Scope, and Purpose.
-- Status must use: `todo`, `doing`, `blocked`, `decision-needed`, `done`, `archived`, or `cancelled`.
+- Status must use the lifecycle values authorized by the selected Dashboard governance contract. This template uses the bundled portable contract: `todo`, `doing`, `blocked`, `decision-needed`, `done`, `archived`, or `cancelled`.
+- Keep lifecycle Status separate from delivery state, claim ceiling, authority/blocker, evidence, and next action.
 - Exit Criteria must be non-empty for Big Ideas, Sessions, and Stage Plans.
 
 ## Advanced Closeout
@@ -22,6 +23,13 @@ For non-trivial governed batches:
 3. Narrow any overbroad completed row before marking it `done`.
 4. Add follow-on rows for unfinished concrete work.
 5. Explain the next recommendation with row ID, topic, why now, and why before other open rows.
+
+## Registry And DKG
+
+- `Sessions.md` and archive Markdown are authoritative records; `Session_Index.md` is derived.
+- Run `python3 Dashboard/tools/session_registry.py reconcile --repo . --check` and `validate` before and after Session changes.
+- Use `reconcile --apply` only for reported derived drift. Duplicate identity, malformed rows, unknown Status, or unknown archive files require manual handling.
+- Generate `dashboard-kg.json` explicitly only after both registry gates pass. Reconcile never generates it.
 
 ## Candidate Memory
 

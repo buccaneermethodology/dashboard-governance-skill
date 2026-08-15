@@ -23,3 +23,9 @@ If only a narrowed subset finished, rewrite the row to match the completed subse
 ## Frontier Control
 
 Keep `README.md` focused on the current frontier. Move long history into closeout reports, archives, external artifacts, or canonical project docs.
+
+## Portable Authority And Registry
+
+This example uses `../contracts/dashboard_governance_contract.json` as its lifecycle and field authority. A consuming repository should prefer its own `kb/data/strategy/dashboard_governance_contract.json` when present.
+
+The advanced example also demonstrates a four-surface Session registry: current records, locator index, archived records, and archive manifest. Its tools reconcile only derived surfaces. DKG generation is a separate post-gate command and produces a non-authoritative read model.
