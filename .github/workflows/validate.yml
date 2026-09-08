@@ -20,6 +20,10 @@ jobs:
         run: python3 scripts/validate_dashboard.py examples/Dashboard-advanced --contract examples/contracts/dashboard_governance_contract.json --require-registry
       - name: Test registry and DKG fail-closed behavior
         run: python3 scripts/test_registry.py
+      - name: Validate artifact batches
+        run: |
+          python3 scripts/validate_artifacts.py examples/Dashboard-advanced/Artifacts
+          python3 scripts/test_artifacts.py
       - name: Validate registry sample directly
         run: |
           python3 examples/Dashboard-advanced/tools/session_registry.py reconcile --repo examples/Dashboard-advanced --contract examples/contracts/dashboard_governance_contract.json --check

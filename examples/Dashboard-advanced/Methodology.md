@@ -4,6 +4,8 @@ The advanced Dashboard is an execution-state index for projects that need more t
 
 It adds optional files for stage plans, risks, exceptions, quality metrics, automation, external artifacts, and agent log conventions. These files are still not canonical truth. They help agents close work honestly, preserve high-value memory, and avoid rediscovering specific deferred work.
 
+Durable outputs use the optional `Artifacts/` batch layout: one `Goal-<ID>/` or `Stage-Plan-<ID>/` directory per owner, with a batch `README.md` describing scope and provenance. The root is only a locator surface; it must not accumulate loose files.
+
 ## Lanes
 
 - Builder creates or changes the primary artifacts.

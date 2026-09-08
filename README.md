@@ -1,6 +1,6 @@
 # Dashboard Governance Skill
 
-Current candidate version: `0.2.0`. Local files and validators do not prove publication; publication requires the tag and GitHub Release steps in `docs/PUBLISHING.md`.
+Current candidate version: `0.3.0`. Local files and validators do not prove publication; publication requires the tag and GitHub Release steps in `docs/PUBLISHING.md`.
 
 [![validate](https://github.com/buccaneermethodology/dashboard-governance-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/buccaneermethodology/dashboard-governance-skill/actions/workflows/validate.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -65,6 +65,7 @@ Use `examples/Dashboard/` for lightweight projects. Use `examples/Dashboard-adva
 - Minimal and advanced example Dashboard directories that can be copied into a repository
 - No-dependency local validators for skill structure and Dashboard health
 - Portable contract authority, optional four-surface Session registry reconciliation, and explicit post-gate DKG sample tooling
+- Goal/Stage Plan artifact batches with fail-closed layout validation
 - GitHub Actions workflow for validation on push and pull request
 - Portability notes for Claude Code, Cursor, Windsurf, Continue, and other IDE agents
 - Publishing checklist for public GitHub release
@@ -104,6 +105,12 @@ cp -R /path/to/dashboard-governance-skill/examples/Dashboard-advanced ./Dashboar
 ```
 
 Then edit the rows to match your project. Keep the row semantics in `Dashboard/Methodology.md` and `Dashboard/Rules.md` visible to future agents.
+
+For advanced projects, keep durable outputs discoverable by owner under `Dashboard/Artifacts/`. Use one directory per Goal or Stage Plan, such as `Dashboard/Artifacts/Goal-G-001/` or `Dashboard/Artifacts/Stage-Plan-SP-001/`; keep a batch `README.md` with scope and provenance, and do not put loose files in the `Artifacts/` root. Validate it with:
+
+```bash
+python3 scripts/validate_artifacts.py Dashboard/Artifacts
+```
 
 For the advanced registry workflow, also install a project contract:
 
@@ -189,6 +196,8 @@ examples/Dashboard-advanced/
   Automation.md
   External_Artifacts.md
   Agent_Logs/README.md
+  Artifacts/README.md
+  Artifacts/Stage-Plan-SP-001/README.md
   Session_Index.md
   Archives/Sessions/
   tools/session_registry.py
@@ -215,6 +224,8 @@ python3 scripts/validate_skill.py skill/dashboard-governance
 python3 scripts/validate_dashboard.py examples/Dashboard --contract examples/contracts/dashboard_governance_contract.json
 python3 scripts/validate_dashboard.py examples/Dashboard-advanced --contract examples/contracts/dashboard_governance_contract.json --require-registry
 python3 scripts/test_registry.py
+python3 scripts/validate_artifacts.py examples/Dashboard-advanced/Artifacts
+python3 scripts/test_artifacts.py
 ```
 
 If you have the official Codex skill validator available, run it too:

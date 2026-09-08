@@ -14,6 +14,22 @@ Use this template when the project needs:
 - explicit risk and exception tracking
 - quality metrics or validation gates
 - automation and external artifact indexes
+- Goal/Stage Plan artifact batches under `Artifacts/`
 - agent log conventions
 
 Stable project truth still belongs in the KB, docs, ADRs, specs, or contracts. Dashboard rows should point to durable artifacts instead of copying their contents.
+
+## Artifact Batches
+
+Durable outputs are grouped by their owner so the root does not become a flat pile of files:
+
+```text
+Artifacts/
+  README.md
+  Stage-Plan-SP-001/
+    README.md
+    validation/
+      verdict.md
+```
+
+Use a Goal batch when the output belongs to the whole Goal; use a Stage Plan batch for narrower work. Keep the exact owner ID, scope, provenance, and artifact list in each batch `README.md`. Run `python3 scripts/validate_artifacts.py examples/Dashboard-advanced/Artifacts` after adding or moving outputs.

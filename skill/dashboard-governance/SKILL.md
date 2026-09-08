@@ -21,6 +21,18 @@ Use this skill to keep execution state visible without contaminating canonical p
 10. Add concrete P0 or P1 candidates by default. Add P2/P3 candidates only when they are specific, low-noise, and costly to rediscover. A `todo` session is a visible option, not an execution promise.
 11. When the project uses advanced validation or closure lanes, do not close the governed batch until the required validation verdict or closure note is recorded.
 
+## Artifact Batches
+
+When a Dashboard has an `Artifacts/` directory, group durable outputs by their owning Goal or Stage Plan instead of placing files directly in the root:
+
+- use `Artifacts/Goal-<GOAL-ID>/` for outputs owned by a Goal;
+- use `Artifacts/Stage-Plan-<STAGE-PLAN-ID>/` for outputs owned by a Stage Plan;
+- when a Stage Plan exists under a Goal, prefer the narrower Stage Plan batch and do not duplicate the same artifact in both directories;
+- keep a `README.md` in every batch directory with the owner ID, scope, provenance, and a short artifact index; optional type subdirectories may organize that batch's files;
+- keep the `Artifacts/` root free of direct artifact files and do not use symlinks.
+
+Run the project's artifact validator when available. The portable advanced example provides `scripts/validate_artifacts.py` and a matching test; this layout is an organizational convention and does not make generated files canonical truth or release evidence.
+
 ## Session Registry
 
 When a project has any of `Dashboard/Session_Index.md`, `Dashboard/Archives/Sessions/`, or `Dashboard/Archives/Sessions/archive_manifest.json`, treat it as registry-capable and read `references/dashboard-method.md` before editing Session records.

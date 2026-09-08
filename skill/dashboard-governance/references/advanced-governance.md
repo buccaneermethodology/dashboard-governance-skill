@@ -14,9 +14,29 @@ Add these files only when they reduce hidden coordination cost:
 - `Quality_Metrics.md`: evidence targets, quality bars, validation results, and metric history.
 - `Automation.md`: recurring checks, reminders, monitors, scripts, or scheduled maintenance.
 - `External_Artifacts.md`: durable artifacts outside the Dashboard, including reports, PRs, issues, datasets, generated files, and release links.
+- `Artifacts/`: durable outputs grouped into one batch directory per owning Goal or Stage Plan.
 - `Agent_Logs/README.md`: conventions for storing or referencing agent logs when a project requires them.
 
 These files remain indexes. Put durable project truth in the KB, specs, ADRs, or contracts. Put long narrative history in closeout reports, archives, or external artifacts.
+
+## Artifact Batch Convention
+
+Keep the `Artifacts/` root as a locator surface. Do not place artifact files directly under it. Each Goal or Stage Plan gets one directory named with its owner type and exact ID:
+
+```text
+Artifacts/
+  README.md
+  Goal-G-001/
+    README.md
+    reports/
+      closeout.md
+  Stage-Plan-SP-001/
+    README.md
+    validation/
+      verdict.md
+```
+
+Each batch `README.md` should state the owner ID, scope, provenance, and contained files. Optional subdirectories are allowed inside a batch. Prefer a Stage Plan directory when the output is scoped to one, do not duplicate the same artifact under its parent Goal, and reject symlinks. The batch layout improves findability only; Dashboard rows, KB contracts, and independent validation retain their existing authority boundaries.
 
 ## Advanced Lanes
 

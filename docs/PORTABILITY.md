@@ -38,6 +38,7 @@ The method is most reliable when paired with durable repo artifacts:
 - `Dashboard/Sessions.md`
 - `Dashboard/Decisions.md`
 - optional advanced files such as `Dashboard/Stage_Plans.md`, `Dashboard/Risks.md`, and `Dashboard/Quality_Metrics.md`
+- optional `Dashboard/Artifacts/` batches, one per owning Goal or Stage Plan
 - repository workflow rules that require end-of-task review
 
 Do not rely on chat memory alone.
@@ -48,5 +49,7 @@ Do not rely on chat memory alone.
 - Otherwise a repository validator may explicitly receive the bundled sample with `--contract`; do not silently claim project-specific authority.
 - If current/index/archive/manifest surfaces and registry tooling are absent, use the minimal Dashboard mode and do not claim reconciliation.
 - If registry tooling exists, require `reconcile --check` and `validate` before DKG generation. DKG remains a non-authoritative read model.
+
+When a project adopts artifact batches, keep `Dashboard/Artifacts/` as a locator surface and put each Goal or Stage Plan's outputs in its own `Goal-<ID>/` or `Stage-Plan-<ID>/` directory. Preserve the owner ID, scope, provenance, and artifact list in that directory's `README.md`; do not use loose root files or symlinks. The batch validator checks organization, not semantic correctness or release authority.
 
 The tools use only Python's standard library and relative paths. They contain no Semx project path, private phase code, or migration-only identity rule.

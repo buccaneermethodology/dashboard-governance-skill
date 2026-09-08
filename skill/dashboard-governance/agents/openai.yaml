@@ -1,4 +1,4 @@
 interface:
   display_name: "Dashboard Governance"
   short_description: "Maintain Dashboard execution state"
-  default_prompt: "Use $dashboard-governance to update a Big-Idea/Session/Decision Dashboard after a project task, close narrowed work honestly, and recommend the next row with rationale."
+  default_prompt: "Use $dashboard-governance to update a Big-Idea/Session/Decision Dashboard after a project task, group Goal or Stage Plan artifacts into one batch directory, close narrowed work honestly, and recommend the next row with rationale."

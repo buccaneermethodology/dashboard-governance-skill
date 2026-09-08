@@ -24,6 +24,14 @@ For non-trivial governed batches:
 4. Add follow-on rows for unfinished concrete work.
 5. Explain the next recommendation with row ID, topic, why now, and why before other open rows.
 
+## Artifact Batches
+
+- Keep durable outputs under `Artifacts/`, grouped by the owning Goal or Stage Plan.
+- Use `Artifacts/Goal-<GOAL-ID>/` or `Artifacts/Stage-Plan-<STAGE-PLAN-ID>/` and keep a batch `README.md` with scope and provenance.
+- Keep the `Artifacts/` root free of direct artifact files; use optional type subdirectories only inside a batch.
+- Prefer the narrowest owner and do not duplicate one artifact in both a Goal and a Stage Plan batch.
+- Validate the layout with `python3 scripts/validate_artifacts.py Dashboard/Artifacts` when the project adopts the portable validator.
+
 ## Registry And DKG
 
 - `Sessions.md` and archive Markdown are authoritative records; `Session_Index.md` is derived.

@@ -70,6 +70,25 @@ python3 Dashboard/tools/generate_dashboard_kg.py --repo . --output Dashboard/das
 
 The generator must rerun or enforce the registry gate. `session_registry.py reconcile` must never generate DKG implicitly.
 
+## Artifact Batch Layout
+
+For advanced Dashboards that keep durable outputs under `Artifacts/`, use one directory per owning Goal or Stage Plan:
+
+```text
+Dashboard/Artifacts/
+  README.md
+  Goal-G-001/
+    README.md
+    validation/
+      verdict.md
+  Stage-Plan-SP-002/
+    README.md
+    decisions/
+      decision-record.md
+```
+
+The root `Artifacts/` directory is a locator surface, not a drop zone: direct artifact files are not allowed. A batch `README.md` records the exact owner ID, scope, provenance, and contents. Prefer the narrowest owner (Stage Plan over parent Goal) and do not duplicate one artifact across batches. This convention controls discoverability; it does not change the authority or claim ceiling of the artifact.
+
 ## Emergent Session Filter
 
 Add a new session when it is concrete, newly visible from work just completed, and worth preserving as execution memory.
