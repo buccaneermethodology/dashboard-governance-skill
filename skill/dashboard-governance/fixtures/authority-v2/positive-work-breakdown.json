@@ -1,0 +1,12 @@
+{
+  "schema_version":"dashboard_work_breakdown_v2",
+  "profile":"advanced",
+  "authority_root_id":"generic-delivery-authority-root",
+  "authority_root_revision":"1",
+  "parent_delivery_id":"generic-delivery",
+  "source_revision":"generic-delivery-r1",
+  "subject_created_at":"2026-01-02T00:00:00Z",
+  "sessions":[{"id":"delivery-session","parent_delivery_id":"generic-delivery","completion_rule_id":"delivery-complete","completion_rule":"all required milestones and lane evidence are satisfied","milestone_ids":["design","build","validate"],"required_lane_ids":["design-lane","builder-lane","validation-lane"],"status":"active"}],
+  "milestones":[{"id":"design","session_id":"delivery-session","sequence":1,"status":"satisfied"},{"id":"build","session_id":"delivery-session","sequence":2,"status":"active"},{"id":"validate","session_id":"delivery-session","sequence":3,"status":"planned"}],
+  "lanes":[{"id":"design-lane","status":"validated"},{"id":"builder-lane","status":"running"},{"id":"validation-lane","status":"planned"}]
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": "legacy_supported",
+  "profile": "minimal",
+  "minimal_evidence": {
+    "dashboard_dir": "../Dashboard",
+    "contract": "../contracts/dashboard_governance_contract.json"
+  }
+}

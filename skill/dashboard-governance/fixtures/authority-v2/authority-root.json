@@ -1,0 +1,12 @@
+{
+  "schema_version":"evidence_authority_root_v2",
+  "authority_root_id":"generic-delivery-authority-root",
+  "root_revision":"1",
+  "issuer":{"issuer_id":"generic-delivery-owner","issuer_role":"goal_or_stage_plan_owner","provenance_ref":"issuer-provenance.json","provenance_sha256":"6e48c0a330c7c1667358994bbf6428965464be38561400fe6148c410b26b7c02"},
+  "scope":{"scope_id":"generic-delivery-r1","subject_kinds":["session"],"parent_identity":"generic-delivery","source_revision":"generic-delivery-r1"},
+  "subjects":[{"subject_id":"delivery-session","subject_kind":"session","parent_identity":"generic-delivery","revision":"generic-delivery-r1","digest":"88097c7f211a913dfa9c64e153d332dc35201e6fa311bd5eff955f066cf96f99"}],
+  "source":{"source_kind":"delivery_source_authority","locator":"source-authority.json","revision":"generic-delivery-r1","sha256":"795aa9c6adb95baacc4cc4af71bde8a3f6e47decf99ded826f8359db829b7cf1"},
+  "issued_at":"2026-01-01T00:00:00Z",
+  "effective_before":"2026-01-01T12:00:00Z",
+  "supersedes":null
+}

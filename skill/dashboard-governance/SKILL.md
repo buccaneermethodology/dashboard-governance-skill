@@ -10,7 +10,7 @@ description: Maintain a Big-Idea/Session/Decision project Dashboard with contrac
 Use this skill to keep execution state visible without contaminating canonical project truth.
 
 1. Read repository workflow rules first. If the project provides `kb/data/strategy/dashboard_governance_contract.json`, read it before interpreting fields or lifecycle Status. Otherwise use the bundled portable sample contract as an explicit default.
-2. Treat Big Ideas as stable semantic tracks and Sessions as bounded time-slice work.
+2. Treat Big Ideas as stable semantic tracks. Under the advanced v2 profile, model one end-to-end delivery unit as one Session, its ordered checkpoints as Milestones, and responsibility-bearing execution or review nodes as Lanes. Do not represent phases or lanes as separate Sessions when they share one completion rule.
 3. Require TSP for Big Ideas and Sessions: Topic, Scope, and Purpose.
 4. Track decisions separately when an unresolved choice could distort multiple sessions.
 5. Keep lifecycle `Status` separate from Delivery State, Claim Ceiling, Authority / Blocker, Evidence, and Next. Never invent compound lifecycle values such as `partial`, `proposed`, or `bounded-*`.
@@ -20,6 +20,20 @@ Use this skill to keep execution state visible without contaminating canonical p
 9. Check whether one or more candidate next sessions became visible.
 10. Add concrete P0 or P1 candidates by default. Add P2/P3 candidates only when they are specific, low-noise, and costly to rediscover. A `todo` session is a visible option, not an execution promise.
 11. When the project uses advanced validation or closure lanes, do not close the governed batch until the required validation verdict or closure note is recorded.
+
+## Work Breakdown Profiles
+
+- The minimal profile remains compatible with Dashboards that only use Big Ideas, Sessions, and Decisions. Absence of advanced work-breakdown data is not an error and does not imply advanced v2 compliance.
+- The advanced v2 profile requires an explicit `Work_Breakdown.json` using `dashboard_work_breakdown_v2`. Validate it with the repository's `validate_work_breakdown.py` helper.
+- Advanced v1 data without explicit Session/Milestone/Lane relationships is `migration_required`. Preserve the missing information; do not silently fill relationships or claim v2 compliance.
+- Determine granularity from completion rules and explicit parent/child edges. Words such as `phase`, `stage`, or `step` may produce a warning, but names never determine whether a unit is a Session, Milestone, or Lane.
+- A satisfied Milestone never makes its Session terminal by itself. Terminal aggregation requires all required Milestones satisfied and all required Lanes validated.
+
+## Managed Authority Provisioning
+
+Advanced v2 authority is provisioned before a governed task starts. The owner or platform exact-copies a frozen bundle from `fixtures/authority-v2/` into the installed skill's fixed `.managed-authority/` directory and verifies `digest-manifest.json`. Task payloads, task CLI arguments, and task environment variables must not select or replace the boundary, root, digest, issuer, or verification key. Missing, tampered, incomplete, or ambiguous managed content fails closed.
+
+The bundled fixture is a portable owner-provisioned example and forward-test input. It does not authorize an unrelated project automatically; project-specific roots remain owner-provisioned authority.
 
 ## Artifact Batches
 

@@ -8,6 +8,8 @@
 
 This Dashboard extends the minimal Big Ideas / Sessions / Decisions model with optional governance indexes.
 
+It also includes `Work_Breakdown.json`, the advanced v2 machine-readable separation of one end-to-end Session, its ordered Milestones, and its responsibility-bearing Lanes. Validate it with `python3 scripts/validate_work_breakdown.py examples/Dashboard-advanced/Work_Breakdown.json` from the skill repository.
+
 Use this template when the project needs:
 
 - stage plans for multi-session work
@@ -16,6 +18,7 @@ Use this template when the project needs:
 - automation and external artifact indexes
 - Goal/Stage Plan artifact batches under `Artifacts/`
 - agent log conventions
+- explicit Session/Milestone/Lane work breakdown
 
 Stable project truth still belongs in the KB, docs, ADRs, specs, or contracts. Dashboard rows should point to durable artifacts instead of copying their contents.
 

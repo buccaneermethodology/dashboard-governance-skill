@@ -24,6 +24,14 @@ For non-trivial governed batches:
 4. Add follow-on rows for unfinished concrete work.
 5. Explain the next recommendation with row ID, topic, why now, and why before other open rows.
 
+## Work Breakdown
+
+- Keep one end-to-end completion rule under one Session.
+- Represent ordered checkpoints as Milestones with explicit parent Session and sequence.
+- Represent execution and review responsibilities as Lanes; never collapse a Lane into a Session or Milestone.
+- Do not infer kind from phase/stage naming. Naming patterns are advisory warnings only.
+- Do not mark a Session terminal until every required Milestone is satisfied and every required Lane is validated.
+
 ## Artifact Batches
 
 - Keep durable outputs under `Artifacts/`, grouped by the owning Goal or Stage Plan.

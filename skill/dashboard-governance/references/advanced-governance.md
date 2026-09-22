@@ -4,6 +4,18 @@ Use this reference only when a project has outgrown the minimal Big Ideas / Sess
 
 The advanced layer is optional. Do not make ordinary projects create these files before they need them.
 
+## Session, Milestone, And Lane Contract
+
+Advanced v2 separates three work-unit kinds:
+
+- a Session is one end-to-end delivery unit with one completion rule;
+- a Milestone is an ordered, verifiable checkpoint owned by exactly one Session;
+- a Lane is a responsibility-bearing execution or review node, not a progress phase.
+
+Keep checkpoints that share one delivery completion rule as Milestones of one Session. Do not split them into multiple Sessions merely because their names contain phase or stage labels. Names can support warnings, but only explicit relationships and completion semantics determine validity.
+
+Use `Work_Breakdown.json` and validate it with `scripts/validate_work_breakdown.py`. Existing advanced v1 Dashboards without those relationships need migration and must not be described as advanced v2 compliant. The minimal profile does not require this file.
+
 ## Optional Files
 
 Add these files only when they reduce hidden coordination cost:

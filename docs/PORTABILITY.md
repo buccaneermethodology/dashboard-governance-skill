@@ -53,3 +53,6 @@ Do not rely on chat memory alone.
 When a project adopts artifact batches, keep `Dashboard/Artifacts/` as a locator surface and put each Goal or Stage Plan's outputs in its own `Goal-<ID>/` or `Stage-Plan-<ID>/` directory. Preserve the owner ID, scope, provenance, and artifact list in that directory's `README.md`; do not use loose root files or symlinks. The batch validator checks organization, not semantic correctness or release authority.
 
 The tools use only Python's standard library and relative paths. They contain no Semx project path, private phase code, or migration-only identity rule.
+# Work-Breakdown Portability
+
+The advanced v2 `Work_Breakdown.json` format is plain JSON and the bundled validator uses only the Python standard library. A host does not need Codex-specific APIs to distinguish Sessions, Milestones, and Lanes. Minimal Dashboards remain usable without this advanced surface; legacy advanced data must be migrated before claiming v2 compliance.

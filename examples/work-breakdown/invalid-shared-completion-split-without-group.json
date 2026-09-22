@@ -1,0 +1,21 @@
+{
+  "schema_version": "dashboard_work_breakdown_v2",
+  "profile": "advanced",
+  "authority_root_id": "trusted-delivery-root",
+  "authority_root_revision": "2",
+  "parent_delivery_id": "trusted-delivery",
+  "source_revision": "frozen-goal-r1",
+  "subject_created_at": "2026-01-02T00:00:00Z",
+  "sessions": [
+    {"id": "delivery-part-a", "parent_delivery_id": "invented-a", "completion_rule_id": "part-a-terminal", "completion_rule": "all delivery checkpoints complete", "milestone_ids": ["checkpoint-a"], "required_lane_ids": ["builder"], "status": "active"},
+    {"id": "delivery-part-b", "parent_delivery_id": "invented-b", "completion_rule_id": "part-b-terminal", "completion_rule": "delivery is complete after every checkpoint", "milestone_ids": ["checkpoint-b"], "required_lane_ids": ["validation"], "status": "planned"}
+  ],
+  "milestones": [
+    {"id": "checkpoint-a", "session_id": "delivery-part-a", "sequence": 1, "status": "active"},
+    {"id": "checkpoint-b", "session_id": "delivery-part-b", "sequence": 1, "status": "planned"}
+  ],
+  "lanes": [
+    {"id": "builder", "responsibility": "build", "status": "running"},
+    {"id": "validation", "responsibility": "validate", "status": "planned"}
+  ]
+}

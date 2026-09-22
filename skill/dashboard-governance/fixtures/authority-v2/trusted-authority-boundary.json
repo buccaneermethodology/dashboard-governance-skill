@@ -1,0 +1,1 @@
+{"schema_version":"trusted_authority_boundary_v1","boundary_id":"generic-dashboard-owner-boundary","provisioning":"owner_managed_before_task","root":{"path":"authority-root.json","sha256":"ef2ec29d87144221bedba5c5704abe7f67dbb33a4aea3cec417527e0b3d2831b"},"task_override_allowed":false}

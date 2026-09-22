@@ -1,0 +1,9 @@
+{
+  "schema_version": "legacy_supported",
+  "profile": "minimal",
+  "legacy_required_fields": {
+    "Big_Ideas.md": ["ID", "Topic", "Scope", "Purpose", "Status", "Exit Criteria", "Next Step", "Notes"],
+    "Sessions.md": ["ID", "Topic", "Scope", "Purpose", "Track", "Priority", "Status", "Depends On", "Deliverable", "Exit Criteria", "Next Step", "Notes"],
+    "Decisions.md": ["ID", "Topic", "Status", "Options", "Decision", "Rationale", "Next Step", "Notes"]
+  }
+}

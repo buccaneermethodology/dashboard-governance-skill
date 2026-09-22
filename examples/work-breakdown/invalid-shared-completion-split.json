@@ -1,0 +1,21 @@
+{
+  "schema_version": "dashboard_work_breakdown_v2",
+  "profile": "advanced",
+  "authority_root_id": "trusted-delivery-root",
+  "authority_root_revision": "2",
+  "parent_delivery_id": "trusted-delivery",
+  "source_revision": "frozen-goal-r1",
+  "subject_created_at": "2026-01-02T00:00:00Z",
+  "sessions": [
+    {"id": "phase-1-session", "parent_delivery_id": "one-delivery", "completion_rule_id": "one-delivery-terminal", "completion_rule": "shared delivery complete", "milestone_ids": ["checkpoint-1"], "required_lane_ids": ["builder"], "status": "active"},
+    {"id": "phase-2-session", "parent_delivery_id": "one-delivery", "completion_rule_id": "one-delivery-terminal", "completion_rule": "shared delivery complete", "milestone_ids": ["checkpoint-2"], "required_lane_ids": ["validation"], "status": "planned"}
+  ],
+  "milestones": [
+    {"id": "checkpoint-1", "session_id": "phase-1-session", "sequence": 1, "status": "active"},
+    {"id": "checkpoint-2", "session_id": "phase-2-session", "sequence": 1, "status": "planned"}
+  ],
+  "lanes": [
+    {"id": "builder", "responsibility": "build", "status": "running"},
+    {"id": "validation", "responsibility": "validate", "status": "planned"}
+  ]
+}

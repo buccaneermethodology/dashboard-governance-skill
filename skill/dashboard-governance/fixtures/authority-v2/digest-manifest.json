@@ -1,0 +1,14 @@
+{
+  "schema_version":"owner_provisioned_authority_bundle_manifest_v1",
+  "bundle_id":"generic-dashboard-authority-bundle-r1",
+  "revision":"1",
+  "manifest_self_digest_excluded":true,
+  "files":[
+    {"path":"authority-root.json","sha256":"ef2ec29d87144221bedba5c5704abe7f67dbb33a4aea3cec417527e0b3d2831b"},
+    {"path":"issuer-provenance.json","sha256":"6e48c0a330c7c1667358994bbf6428965464be38561400fe6148c410b26b7c02"},
+    {"path":"positive-work-breakdown.json","sha256":"9f38de0bc26156624aa4e60070cf01a03ab5d6c7de74167b1cf8c8d9fdf43891"},
+    {"path":"source-authority.json","sha256":"795aa9c6adb95baacc4cc4af71bde8a3f6e47decf99ded826f8359db829b7cf1"},
+    {"path":"trusted-authority-boundary.json","sha256":"4d20049d22d1faa113f3c9c0dc223aefc6d6492b8734f01b936eacfb13f24749"}
+  ],
+  "copy_policy":"exact_bytes_only"
+}

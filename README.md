@@ -1,6 +1,6 @@
 # Dashboard Governance Skill
 
-Current candidate version: `0.3.0`. Local files and validators do not prove publication; publication requires the tag and GitHub Release steps in `docs/PUBLISHING.md`.
+Current candidate version: `0.4.0`. Local files and validators do not prove publication; publication requires the tag and GitHub Release steps in `docs/PUBLISHING.md`.
 
 [![validate](https://github.com/buccaneermethodology/dashboard-governance-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/buccaneermethodology/dashboard-governance-skill/actions/workflows/validate.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -57,6 +57,8 @@ If actual work completed only a narrowed subset of the original session, the age
 
 Use `examples/Dashboard/` for lightweight projects. Use `examples/Dashboard-advanced/` when the project needs optional files such as `Stage_Plans.md`, `Risks.md`, `Exceptions.md`, `Quality_Metrics.md`, `Automation.md`, `External_Artifacts.md`, or `Agent_Logs/README.md`.
 
+The advanced v2 profile also uses `Work_Breakdown.json` to distinguish one end-to-end Session from its ordered Milestones and responsibility-bearing Lanes. Older advanced data without explicit relationships requires migration and is not silently treated as v2 compliant. The minimal profile remains compatible without this file.
+
 ## Features
 
 - Codex-native skill layout with `SKILL.md` and `agents/openai.yaml`
@@ -65,6 +67,7 @@ Use `examples/Dashboard/` for lightweight projects. Use `examples/Dashboard-adva
 - Minimal and advanced example Dashboard directories that can be copied into a repository
 - No-dependency local validators for skill structure and Dashboard health
 - Portable contract authority, optional four-surface Session registry reconciliation, and explicit post-gate DKG sample tooling
+- Advanced v2 Session/Milestone/Lane contract, migration diagnostics, and a deterministic granularity gate
 - Goal/Stage Plan artifact batches with fail-closed layout validation
 - GitHub Actions workflow for validation on push and pull request
 - Portability notes for Claude Code, Cursor, Windsurf, Continue, and other IDE agents
@@ -223,6 +226,8 @@ Run the bundled no-dependency validator:
 python3 scripts/validate_skill.py skill/dashboard-governance
 python3 scripts/validate_dashboard.py examples/Dashboard --contract examples/contracts/dashboard_governance_contract.json
 python3 scripts/validate_dashboard.py examples/Dashboard-advanced --contract examples/contracts/dashboard_governance_contract.json --require-registry
+python3 scripts/validate_work_breakdown.py examples/Dashboard-advanced/Work_Breakdown.json
+python3 scripts/test_work_breakdown.py
 python3 scripts/test_registry.py
 python3 scripts/validate_artifacts.py examples/Dashboard-advanced/Artifacts
 python3 scripts/test_artifacts.py

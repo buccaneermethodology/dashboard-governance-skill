@@ -1,0 +1,10 @@
+{
+  "schema_version": "evidence_authority_root_v2_schema",
+  "required": ["authority_root_id", "issuer", "scope", "subjects", "source", "root_revision", "issued_at", "effective_before", "supersedes"],
+  "issuer_required": ["issuer_id", "issuer_role", "provenance_ref", "provenance_sha256"],
+  "scope_required": ["scope_id", "subject_kinds", "parent_identity", "source_revision"],
+  "source_required": ["source_kind", "locator", "revision", "sha256"],
+  "subject_required": ["subject_id", "subject_kind", "parent_identity", "revision", "digest"],
+  "trust_boundary": "Root path and expected SHA-256 come only from the installation-managed preconfigured boundary; neither work-breakdown payload nor validator CLI can select them.",
+  "delivery_issuer_role": "goal_or_stage_plan_owner"
+}

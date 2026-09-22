@@ -1,0 +1,19 @@
+{
+  "schema_version": "dashboard_work_breakdown_v2",
+  "profile": "advanced",
+  "authority_root_id": "caller-root",
+  "authority_root_revision": "1",
+  "parent_delivery_id": "caller-delivery",
+  "source_revision": "caller-source",
+  "subject_created_at": "2026-01-02T00:00:00Z",
+  "delivery_authority": {"path": "caller-created/root.json", "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+  "sessions": [
+    {"id": "caller-session", "parent_delivery_id": "caller-delivery", "completion_rule_id": "caller-rule", "completion_rule": "caller completion", "milestone_ids": ["checkpoint"], "required_lane_ids": ["builder"], "status": "active"}
+  ],
+  "milestones": [
+    {"id": "checkpoint", "session_id": "caller-session", "sequence": 1, "status": "active"}
+  ],
+  "lanes": [
+    {"id": "builder", "responsibility": "build", "status": "running"}
+  ]
+}

@@ -1,10 +1,21 @@
 {
-  "schema_version": "dashboard_governance_contract_v1",
+  "schema_version": "dashboard_governance_contract_v2",
   "contract_role": "portable_default",
   "authority": {
     "lifecycle_status": "this_contract",
     "project_override_path": "kb/data/strategy/dashboard_governance_contract.json",
     "dashboard_role": "execution_memory_not_canonical_truth"
+  },
+  "profiles": {
+    "minimal": {
+      "work_breakdown_required": false,
+      "compatibility": "legacy_supported"
+    },
+    "advanced": {
+      "work_breakdown_required": true,
+      "work_breakdown_contract": "dashboard_work_breakdown_v2",
+      "legacy_without_work_breakdown": "migration_required"
+    }
   },
   "lifecycle_status": {
     "allowed": [

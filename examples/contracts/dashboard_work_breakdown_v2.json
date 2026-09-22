@@ -1,0 +1,28 @@
+{
+  "schema_version": "dashboard_work_breakdown_contract_v2",
+  "contract_role": "portable_default",
+  "work_unit_kinds": ["session", "milestone", "lane"],
+  "required_top_level": ["schema_version", "profile", "authority_root_id", "authority_root_revision", "parent_delivery_id", "source_revision", "subject_created_at", "sessions", "milestones", "lanes"],
+  "required_fields": {
+    "session": ["id", "parent_delivery_id", "completion_rule_id", "completion_rule", "milestone_ids", "required_lane_ids", "status"],
+    "milestone": ["id", "session_id", "sequence", "status"],
+    "lane": ["id", "responsibility", "status"]
+  },
+  "states": {
+    "session": ["planned", "active", "blocked", "terminal_candidate", "terminal"],
+    "milestone": ["planned", "ready", "active", "blocked", "satisfied"],
+    "lane": ["planned", "ready", "running", "blocked", "output_candidate", "validated"]
+  },
+  "invariants": [
+    "Every milestone has exactly one existing parent session.",
+    "A session lists exactly its child milestone identities.",
+    "A lane is a responsibility-bearing node and is never a session or milestone.",
+    "A session cannot be terminal while a required milestone is not satisfied or a required lane is not validated.",
+    "Every advanced v2 session declares a non-empty completion_rule_id.",
+    "A completion_rule_id is unique to one session; sequential checkpoints sharing that identity remain milestones of that session.",
+    "Equivalent normalized completion_rule text cannot be split across sessions by assigning different identities.",
+    "Session inventory, parent identity, revision, and canonical session digest exactly match the configured evidence_authority_root_v2.",
+    "Trusted-root path and expected digest are supplied out of band and cannot be selected by the work-breakdown payload."
+  ],
+  "name_policy": "Names may trigger warnings but never determine work-unit kind or validity."
+}
