@@ -1,0 +1,30 @@
+{
+  "oracle_type": "manual",
+  "source_provenance": {
+    "source_id": "G-001-AC-05",
+    "source_kind": "user-authorized-goal-acceptance-matrix",
+    "manual_reviewed": true,
+    "generated_from_candidate": false
+  },
+  "decision_notes": [
+    "write_performed remains true because a managed target replacement happened before rollback failed.",
+    "The journal retains both the target-relative path and an independent backup locator so recovery does not parse the damaged manifest."
+  ],
+  "artifact": {
+    "schema_version": "dashboard_session_registry_recovery_v1",
+    "transaction_id": "txn-example-001",
+    "state": "recovery_required",
+    "dashboard": ".",
+    "targets": [
+      {
+        "path": "Session_Index.md",
+        "backup": "backups/000.bin",
+        "before_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "expected_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    ],
+    "write_performed": true,
+    "changed_paths": ["Session_Index.md"],
+    "error": "injected second commit and rollback failure"
+  }
+}

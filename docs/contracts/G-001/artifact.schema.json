@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/dashboard-session-registry-recovery-v1.schema.json",
+  "title": "Dashboard Session registry recovery journal",
+  "type": "object",
+  "required": ["schema_version", "transaction_id", "state", "dashboard", "targets", "write_performed", "changed_paths"],
+  "properties": {
+    "schema_version": {"type": "string", "enum": ["dashboard_session_registry_recovery_v1"]},
+    "transaction_id": {"type": "string"},
+    "state": {"type": "string", "enum": ["prepared", "committing", "recovery_required"]},
+    "dashboard": {"type": "string"},
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "backup", "before_sha256", "expected_sha256"],
+        "properties": {
+          "path": {"type": "string"},
+          "backup": {"type": "string"},
+          "before_sha256": {"type": "string"},
+          "expected_sha256": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "write_performed": {"type": "boolean"},
+    "changed_paths": {"type": "array", "items": {"type": "string"}},
+    "error": {"type": "string"}
+  },
+  "additionalProperties": false
+}

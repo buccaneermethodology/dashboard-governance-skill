@@ -1,0 +1,43 @@
+{
+  "goal": "Make registry reconcile apply converge once on success and recover safely and truthfully from every caught multi-file write failure covered by G-001.",
+  "non_goals": [
+    "Automatically move Done Sessions into archives",
+    "Guarantee crash, power-loss, or concurrent-writer consistency",
+    "Publish, install, or migrate downstream copies"
+  ],
+  "users": ["Dashboard operators", "projects adopting the portable registry sample"],
+  "target_workflows": ["reconcile check", "reconcile apply", "explicit recovery", "validate"],
+  "system_boundary": {
+    "inside": ["derived-surface staging", "caught-error rollback", "persistent recovery material", "truthful diagnostics", "fault regression tests"],
+    "outside": ["authoritative Session editing", "archive policy", "DKG generation", "release publication"]
+  },
+  "compatibility_target": "The v0.4.0 Python CLI, Python 3.9+, authoritative/derived split, and existing fail-closed inputs",
+  "technical_constraints": [
+    "Python standard library only",
+    "check and validate remain read-only",
+    "no-op apply preserves bytes and mtimes",
+    "recovery does not depend on parsing the candidate manifest"
+  ],
+  "rollout_stages": ["contract freeze", "implementation and regression", "independent validation", "Dashboard closeout"],
+  "quality_gates": ["contract package validation", "AC-01 through AC-08 tests", "independent AC-09 review", "final Dashboard reconciliation"],
+  "test_strategy": ["positive single- and multi-drift cases", "invalid-input cases", "real-disk fault injection", "rollback and explicit recovery", "full regression"],
+  "session_completion": {
+    "must_haves": [
+      {"id": "MH-001", "requirement": "Normal single- and multi-surface drift converges in one apply without authority mutation.", "acceptance": "AC-01 and AC-02 pass with disk reread."},
+      {"id": "MH-002", "requirement": "Invalid inputs fail before managed-file commit.", "acceptance": "AC-03 passes for every named reject case."},
+      {"id": "MH-003", "requirement": "Every covered staging or commit failure restores invocation-time bytes when recovery facilities work.", "acceptance": "AC-04 passes with real temporary-directory byte assertions."},
+      {"id": "MH-004", "requirement": "A rollback failure leaves truthful diagnostics and independently usable recovery material.", "acceptance": "AC-05 passes and explicit recover succeeds without parsing the damaged manifest."},
+      {"id": "MH-005", "requirement": "Retries and no-op apply are idempotent and diagnostics match disk facts.", "acceptance": "AC-06 and AC-07 pass, including mtime and write_performed assertions."},
+      {"id": "MH-006", "requirement": "Regression evidence covers the defect and preserves existing behavior.", "acceptance": "AC-08 passes with an explicit test-to-AC map."},
+      {"id": "MH-007", "requirement": "The final candidate receives independent review and bounded closeout.", "acceptance": "AC-09 records final digests, verdict, implementation delta, scope delta, and uncovered boundaries."}
+    ],
+    "completion_rule": "All seven original must-haves and AC-01 through AC-09 pass on the final candidate with no unapproved Scope Delta.",
+    "continuation_rule": "Continue through M1, M2, M3, and M4 while any must-have remains and no explicit human decision or verified blocker prevents progress.",
+    "allowed_termination_conditions": ["all must-haves complete", "explicit human decision required", "verified blocker"],
+    "scope_delta_policy": "Deleting, weakening, deferring, or transferring any AC or must-have requires explicit user approval before completion."
+  },
+  "change_control": {
+    "contract_changes_require": ["versioned diff", "updated tests and examples", "review against G-001"],
+    "implementation_must_not_redefine": ["authority split", "failure semantics", "completion rule", "uncovered crash and concurrency boundary"]
+  }
+}

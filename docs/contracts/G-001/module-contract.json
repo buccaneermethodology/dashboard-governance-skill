@@ -1,0 +1,32 @@
+{
+  "purpose": "Rebuild registry projections with caught-error rollback and explicit persistent recovery.",
+  "inputs": [
+    {"name": "repo", "type": "directory", "required": true},
+    {"name": "contract", "type": "JSON file", "required": true},
+    {"name": "command", "type": "reconcile, validate, or recover", "required": true}
+  ],
+  "outputs": [
+    {"name": "CLI result", "schema": "documented diagnostic contract"},
+    {"name": "recovery journal", "schema": "artifact.schema.json"}
+  ],
+  "dependencies": ["Python standard library", "dashboard_governance_contract_v2", "artifact.schema.json"],
+  "state_changes": [
+    "apply may replace only drifting derived files and transaction material",
+    "recover may restore only targets bound by a valid transaction journal"
+  ],
+  "errors": [
+    {"code": "INPUT_REJECTED", "condition": "authority, contract, registry, archive, symlink, or recovery preflight is invalid"},
+    {"code": "APPLY_FAILED_ROLLED_BACK", "condition": "apply failed and every target was verified at its invocation-time bytes"},
+    {"code": "RECOVERY_REQUIRED", "condition": "rollback, journal update, or required cleanup could not establish a clean invocation-time state"}
+  ],
+  "validation_surface": ["target bytes", "target mtimes", "journal and backup bytes", "CLI output and exit code", "post-operation check and validate"],
+  "constraints": ["standard library only", "recovery paths cannot escape Dashboard", "candidate manifest is never recovery authority"],
+  "non_goals": ["automatic archive movement", "crash consistency", "publication"],
+  "downstream_consumers": ["Dashboard operators", "generate_dashboard_kg.py", "projects that copy the portable sample"],
+  "implementation_slices": [
+    {"id": "SLICE-1", "covers": ["MH-001", "MH-002"], "depends_on": [], "readiness": "ready", "outcome": "Preflight and one-pass no-op-aware multi-surface apply behavior."},
+    {"id": "SLICE-2", "covers": ["MH-003", "MH-004"], "depends_on": ["SLICE-1"], "readiness": "ready_after_dependencies", "outcome": "Durable backup, rollback, truthful recovery_required diagnostics, and explicit recover."},
+    {"id": "SLICE-3", "covers": ["MH-005", "MH-006"], "depends_on": ["SLICE-2"], "readiness": "ready_after_dependencies", "outcome": "Complete fault matrix and compatibility regression evidence."},
+    {"id": "SLICE-4", "covers": ["MH-007"], "depends_on": ["SLICE-3"], "readiness": "ready_after_dependencies", "outcome": "Independent final-candidate verdict and Dashboard closeout."}
+  ]
+}

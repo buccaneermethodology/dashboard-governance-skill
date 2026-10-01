@@ -1,0 +1,23 @@
+{
+  "blocking_checks": [
+    {"id": "ac-01-02", "rule": "Normal status-only and explicit archive-move drift converge in one apply with authority bytes unchanged."},
+    {"id": "ac-03", "rule": "Every named invalid input fails before managed target commit."},
+    {"id": "ac-04", "rule": "Every covered caught write failure restores all managed targets when recovery facilities work."},
+    {"id": "ac-05", "rule": "Rollback failure preserves truthful recovery material and explicit recovery succeeds without manifest parsing."},
+    {"id": "ac-06-07", "rule": "Retry, no-op, mtime, exit, and diagnostic semantics match disk facts."},
+    {"id": "ac-08-09", "rule": "Full regression and independent final-candidate review pass."}
+  ],
+  "advisory_checks": [
+    {"id": "future-crash-consistency", "rule": "Consider crash and power-loss recovery only under a separately authorized contract."},
+    {"id": "future-concurrency", "rule": "Consider external-writer locking only under a separately authorized contract."}
+  ],
+  "required_closeout_fields": [
+    "slice_verdict",
+    "session_terminal",
+    "remaining_must_haves",
+    "scope_delta",
+    "next_slice",
+    "human_decision_required"
+  ],
+  "claim_ceiling": "Passing G-001 establishes caught-error recovery for the tested local-filesystem paths in this repository; it does not establish crash consistency, concurrency safety, downstream deployment, or publication."
+}

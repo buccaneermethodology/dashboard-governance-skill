@@ -1,0 +1,17 @@
+{
+  "schema_version": "dashboard_session_registry_recovery_v1",
+  "transaction_id": "txn-example-001",
+  "state": "recovery_required",
+  "dashboard": ".",
+  "targets": [
+    {
+      "path": "Session_Index.md",
+      "backup": "backups/000.bin",
+      "before_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "expected_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  ],
+  "write_performed": true,
+  "changed_paths": ["Session_Index.md"],
+  "error": "injected second commit and rollback failure"
+}
