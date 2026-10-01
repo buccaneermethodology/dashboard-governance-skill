@@ -69,8 +69,8 @@ def validate(skill_dir: Path) -> list[str]:
 
     root = skill_dir.parents[1]
     version_file = root / "VERSION"
-    if not version_file.is_file() or version_file.read_text(encoding="utf-8").strip() != "0.4.0":
-        errors.append("VERSION must be 0.4.0")
+    if not version_file.is_file() or version_file.read_text(encoding="utf-8").strip() != "0.4.1":
+        errors.append("VERSION must be 0.4.1")
     if not (root / "examples/contracts/dashboard_governance_contract.json").is_file():
         errors.append("portable sample contract is missing")
     if not (root / "examples/contracts/dashboard_work_breakdown_v2.json").is_file():

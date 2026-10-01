@@ -1,6 +1,6 @@
 # Dashboard Governance Skill
 
-Current candidate version: `0.4.0`. Local files and validators do not prove publication; publication requires the tag and GitHub Release steps in `docs/PUBLISHING.md`.
+Current candidate version: `0.4.1`. Local files and validators do not prove publication; publication requires the tag and GitHub Release steps in `docs/PUBLISHING.md`.
 
 [![validate](https://github.com/buccaneermethodology/dashboard-governance-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/buccaneermethodology/dashboard-governance-skill/actions/workflows/validate.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)

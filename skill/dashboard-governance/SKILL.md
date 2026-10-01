@@ -54,8 +54,9 @@ When a project has any of `Dashboard/Session_Index.md`, `Dashboard/Archives/Sess
 1. Run the project-provided `session_registry.py reconcile --check` and `validate` commands before editing.
 2. Edit the authoritative current or archive Markdown record, not the derived index.
 3. Run `reconcile --check`. Use `reconcile --apply` only for derived drift that the tool explicitly identifies as repairable, then rerun `--check` and `validate`.
-4. Stop on duplicate identity, malformed row, unknown Status, or unknown archive surface. Do not guess, delete, or use first-wins behavior.
-5. Generate DKG only after both registry gates pass, only when graph-affecting inputs changed, and only through an explicit generator command. Reconciliation must not generate DKG as a side effect, and DKG is never Session authority.
+4. If apply reports `RECOVERY_REQUIRED`, do not rerun apply or edit a damaged derived surface. Preserve the reported transaction material and use the project tool's exact recovery command. Treat `write_performed` as whether a managed replacement occurred, even if rollback restored the original bytes.
+5. Stop on duplicate identity, malformed row, unknown Status, unknown archive surface, unsafe recovery path, or symlink. Do not guess, delete, or use first-wins behavior.
+6. Generate DKG only after both registry gates pass, only when graph-affecting inputs changed, and only through an explicit generator command. Reconciliation must not generate DKG as a side effect, and DKG is never Session authority.
 
 If the project has no registry tooling, report that the capability is unavailable. Do not claim reconciliation from prose inspection. The repository's `examples/Dashboard-advanced/tools/` provides portable sample tooling that projects may adopt explicitly.
 

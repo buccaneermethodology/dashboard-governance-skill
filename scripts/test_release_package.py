@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Determinism and fail-closed tests for the v0.4.0 release package."""
+"""Determinism and fail-closed tests for the v0.4.1 release package."""
 
 from __future__ import annotations
 
@@ -25,8 +25,8 @@ def main() -> int:
         root = Path(temporary)
         first, second = root / "first", root / "second"
         for output in (first, second):
-            run([sys.executable, str(BUILDER), "build", "--source", str(SOURCE), "--version", "0.4.0", "--output-dir", str(output)])
-        archive_name = "dashboard-governance-skill-v0.4.0.tar.gz"
+            run([sys.executable, str(BUILDER), "build", "--source", str(SOURCE), "--version", "0.4.1", "--output-dir", str(output)])
+        archive_name = "dashboard-governance-skill-v0.4.1.tar.gz"
         if (first / archive_name).read_bytes() != (second / archive_name).read_bytes():
             raise AssertionError("release archive is not deterministic")
         if (first / "SHA256SUMS").read_bytes() != (second / "SHA256SUMS").read_bytes():

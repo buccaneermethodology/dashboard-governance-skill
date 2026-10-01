@@ -58,6 +58,8 @@ python3 Dashboard/tools/session_registry.py validate --repo .
 
 `reconcile --apply` may rebuild only the index and derived manifest counts. It must fail closed on duplicate IDs, malformed rows, unknown lifecycle values, manifest/file disagreement, symlinks, or unexpected archive files. Handle those inputs manually; never guess identity, pick the first duplicate, or delete an unknown file.
 
+The portable v0.4.1 example also distinguishes a caught apply failure that rolled back cleanly from one that requires explicit recovery. On `APPLY_FAILED_ROLLED_BACK`, the original drift still exists and validation may continue to fail. On `RECOVERY_REQUIRED`, preserve the reported transaction directory, do not rerun apply, and run the exact `recover --repo ... --transaction ...` command before check or validate. A recovery command must reject escaping paths and symlinks, must not depend on parsing a possibly damaged manifest, and may report success only after restoring ordinary files and rereading their bytes. `write_performed=true` means a managed target replacement occurred during the invocation; it remains true even when rollback later restores the invocation-time bytes.
+
 Projects without equivalent tooling do not have executable reconciliation capability. They may adopt the sample or keep a simpler Dashboard, but must not claim that the four surfaces were reconciled.
 
 ## DKG Post-Gate
